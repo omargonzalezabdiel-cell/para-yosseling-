@@ -1,0 +1,161 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: linear-gradient(135deg, #111111, #2b1318);
+    color: #f4e4e4;
+    font-family: 'Raleway', sans-serif;
+    line-height: 2;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* === ANIMACIÓN 10: LLUVIA DE CORAZONES (Fondo) === */
+.rain-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; /* Para que no interfiera al leer/hacer clic */
+    z-index: 0;
+}
+.heart-rain {
+    position: absolute;
+    color: rgba(255, 107, 107, 0.15); /* Muy transparentes */
+    font-size: 20px;
+    animation: rain-fall linear infinite;
+}
+.heart-rain:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+.heart-rain:nth-child(2) { left: 20%; animation-duration: 12s; animation-delay: 1s; font-size: 15px; }
+.heart-rain:nth-child(3) { left: 35%; animation-duration: 9s; animation-delay: 2s; }
+.heart-rain:nth-child(4) { left: 50%; animation-duration: 14s; animation-delay: 0.5s; font-size: 25px; }
+.heart-rain:nth-child(5) { left: 65%; animation-duration: 10s; animation-delay: 1.5s; }
+.heart-rain:nth-child(6) { left: 80%; animation-duration: 11s; animation-delay: 2.5s; font-size: 18px; }
+.heart-rain:nth-child(7) { left: 90%; animation-duration: 9s; animation-delay: 0.8s; }
+.heart-rain:nth-child(8) { left: 5%; animation-duration: 13s; animation-delay: 1.8s; font-size: 22px; }
+
+@keyframes rain-fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* === CONTENEDOR PRINCIPAL === */
+.container {
+    max-width: 650px;
+    padding: 80px 20px;
+    text-align: center;
+    z-index: 1; /* Por encima de la lluvia */
+    position: relative;
+}
+
+/* === ANIMACIÓN 3: TEXTO GRADIENTE (Título) === */
+.love-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #d4af37, #ff9ff3, #d4af37);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 5s ease infinite;
+}
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.divider {
+    width: 60px; height: 2px;
+    background-color: #d4af37;
+    margin: 0 auto 60px auto;
+}
+
+/* === EFECTO DE APARICIÓN SUAVE (Lectura) === */
+p {
+    font-size: 1.15rem;
+    margin-bottom: 40px;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+p.visible, header.visible, .firma-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+header {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+.signature {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #e5a9a9;
+    margin-top: 60px;
+}
+
+/* === ANIMACIÓN 11: TYPEWRITER (Firma final) === */
+.firma-container {
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.typewriter-container {
+    height: 40px; /* Mantiene el espacio aunque esté oculto */
+    margin-bottom: 30px;
+}
+.typewriter-hidden {
+    opacity: 0; /* Oculto inicialmente */
+}
+.typewriter-active {
+    overflow: hidden;
+    border-right: 3px solid #ff6b6b;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 2px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #d4af37;
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+@keyframes typing { from { width: 0 } to { width: 100% } }
+@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #ff6b6b; } }
+
+/* === ANIMACIÓN 1: CORAZÓN LATIENDO (Cierre) === */
+.heart-beat-container {
+    display: flex; justify-content: center; margin-top: 20px;
+}
+.heart-beat {
+    position: relative;
+    width: 60px; height: 50px;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.4));
+}
+.heart-beat::before, .heart-beat::after {
+    content: ''; position: absolute;
+    width: 32px; height: 50px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    border-radius: 50px 50px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+    left: 30px; top: 0;
+}
+.heart-beat::after {
+    left: 0; transform: rotate(45deg); transform-origin: 100% 100%;
+}
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(1.1); }
+    20%, 40% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
